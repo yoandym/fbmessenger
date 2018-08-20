@@ -249,7 +249,7 @@ class BaseMessenger(object):
 
     def handle(self, payload):
         for entry in payload['entry']:
-            for message in entry['messaging']:
+            for message in entry.get('messaging', dict()):
                 self.last_message = message
                 if message.get('account_linking'):
                     return self.account_linking(message)
